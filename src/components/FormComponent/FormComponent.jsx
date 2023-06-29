@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { UsuarioContext } from "../../contexts/UsuarioContext";
 
 const FormComponent = () => {
   const [data, setData] = useState({
@@ -7,6 +8,8 @@ const FormComponent = () => {
     senha: '',
   });
 
+  const { listaUsuarios, setListaUsuarios, setUsuario } = useContext(UsuarioContext);
+
   const handleInput = (e) => {
     const { value, name } = e.target;
     setData({...data, [name]: value});
@@ -14,7 +17,10 @@ const FormComponent = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`Ola ${data.nome}, seu email e ${data.email}`);
+    setUsuario(data);
+    setListaUsuarios([...listaUsuarios, data]);
+
+    console.log(listaUsuarios);
   }
 
   return (
