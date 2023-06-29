@@ -1,7 +1,8 @@
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { UsuarioContext } from '../../contexts/UsuarioContext';
 
-function FormComponent() {
+const FormComponent = () => {
   //forma mais custosa
   //const [nome,setNome] = useState('');
   //const [email,setEmail] = useState('');
@@ -12,6 +13,7 @@ function FormComponent() {
     email: '',
     senha: '',
   });
+  const { setUsuario } = useContext(UsuarioContext);
 
   //forma mais custosa
   //const handleNome = (e) => {setData({...data, nome: e.target.value})};
@@ -25,22 +27,23 @@ function FormComponent() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-        console.log(`Olá ${data.nome}, seu email é ${data.email}`);
+    setUsuario(data);
+    //alert(`Olá ${data.nome}, seu email é ${data.email}`);
   }
 
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="nome">Nome</label>
           <input type="text" name="nome" id="nome" onChange={handleInput} required/>
         </div>
         <div>
-          <label htmlFor="email"></label>
+          <label htmlFor="email">Email</label>
           <input type="email" name="email" id="email" onChange={handleInput}required/>
         </div>
         <div>
-          <label htmlFor="password"></label>
+          <label htmlFor="password">Senha</label>
           <input type="password" name="senha" id="senha" onChange={handleInput} required/>
         </div>
         <div>
