@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UsuarioContext } from "../../contexts/UsuarioContext";
 
 const FormComponent = () => {
     const [data, setData] = useState({
@@ -6,6 +7,8 @@ const FormComponent = () => {
         email: '',
         senha: '',
     });
+
+    const { setUsuario } = useContext(UsuarioContext);
 
     /* Forma mais custosa 
     const handleNome = (e) => { 
@@ -28,7 +31,7 @@ const FormComponent = () => {
 
     const handleSubmit = (e) => {
        e.preventDefault();
-       alert(`Ola ${data.nome}, seu email é ${data.email}`)
+       setUsuario(data);
     }
     
   return (
