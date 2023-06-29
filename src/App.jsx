@@ -1,9 +1,12 @@
 import './App.css';
+import FormComponent from './components/FOrmComponent/FormComponent';
+
 
 function App() {
   return (
     <>
       <p>App is Render</p>
+    <FormComponent/>
     </>
   )
 }
