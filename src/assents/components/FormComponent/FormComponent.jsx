@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { UsuarioContext } from "../../../contexts/UsuarioContext";
 // formulario reativo
 const FormComponent = () => {
 const [data, setData] = useState({
@@ -6,6 +7,8 @@ const [data, setData] = useState({
     email:'',
     senha:'',
 });//substituindo um useState para cada input
+
+const {setUsuario} = useContext(UsuarioContext);
 
 
 // Umas solução maior para os inputs
@@ -21,7 +24,7 @@ const [data, setData] = useState({
 
     const handleSubmit =(e) =>{
         e.preventDefault();// para nao dar reload na tela
-        alert(`Ola ${data.nome}, seu email é ${data.email}`)
+        setUsuario(data);
     }
     return (
         <>
