@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UsuarioContext } from "../../contexts/UsuarioContext/UsuarioContext";
 
 function FormComponent() {
   const [formData, setFormData] = useState({
@@ -6,6 +7,9 @@ function FormComponent() {
     email: "",
     password: "",
   });
+  
+  const {setUsuario} = useContext(UsuarioContext)
+
   const handleInput = (e) => {
     const { value, name } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -13,7 +17,7 @@ function FormComponent() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`Ola, ${formData.nome}, seu email é ${formData.email}`)
+    setUsuario(formData)
   };
   return (
     <>
@@ -23,7 +27,7 @@ function FormComponent() {
           <input
             type="text"
             name="nome"
-            id='nome'
+            id="nome"
             onChange={handleInput}
             required
           />
@@ -33,7 +37,7 @@ function FormComponent() {
           <input
             type="email"
             name="email"
-            id={formData.email}
+            id="email"
             onChange={handleInput}
             required
           />
@@ -43,7 +47,7 @@ function FormComponent() {
           <input
             type="password"
             name="password"
-            id={formData.password}
+            id="password"
             onChange={handleInput}
             required
           />
