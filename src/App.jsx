@@ -1,11 +1,15 @@
 import "./App.css";
+import Header from "./components/Header/Header";
 import FormComponent from "./components/formComponents/FormComponents";
+import { UsuarioProvider } from "./contexts/UsuarioContext";
 
 function App() {
   return (
     <>
-      <p>App is Render</p>
-      <FormComponent />
+      <UsuarioProvider>
+        <Header />
+        <FormComponent />
+      </UsuarioProvider>
     </>
   );
 }
