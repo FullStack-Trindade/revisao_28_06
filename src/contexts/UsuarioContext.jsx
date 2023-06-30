@@ -7,6 +7,8 @@ export const UsuarioContext = createContext({
     senha: '',
     },
     setUsuario: () => {},
+    listaUsuarios: [],
+    setListaUsuarios: () => {},
 });
 
 export const UsuarioProvider  = ( props ) => {
@@ -16,8 +18,10 @@ export const UsuarioProvider  = ( props ) => {
         senha: '123456',
     });
 
+    const [listaUsuarios, setListaUsuarios] = useState([...[], usuario]);
+
     return(
-        <UsuarioContext.Provider value={{usuario, setUsuario}}>
+        <UsuarioContext.Provider value={{usuario, setUsuario, listaUsuarios, setListaUsuarios}}>
             {props.children}
         </UsuarioContext.Provider>
     )

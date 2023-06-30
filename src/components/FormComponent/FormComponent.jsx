@@ -1,5 +1,5 @@
 
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from "react"
 import { UsuarioContext } from '../../contexts/UsuarioContext';
 
 const FormComponent = () => {
@@ -13,7 +13,17 @@ const FormComponent = () => {
     email: '',
     senha: '',
   });
-  const { setUsuario } = useContext(UsuarioContext);
+  const [showPassword, setShowPassword] = useState(false)
+
+  const inputSenhaRef = useRef();
+  const { listaUsuarios, setListaUsuarios, setUsuario } = useContext(UsuarioContext);
+
+
+  useEffect(() => {
+    inputSenhaRef.current.type = inputSenhaRef.current.type === 'password'
+      ? 'text'
+      : 'password';
+  }, [showPassword])
 
   //forma mais custosa
   //const handleNome = (e) => {setData({...data, nome: e.target.value})};
@@ -25,9 +35,15 @@ const FormComponent = () => {
     setData({...data, [name]: value});
   }
 
+  const show = () => {
+    setShowPassword(!showPassword);
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setUsuario(data);
+    setListaUsuarios([...listaUsuarios, data]);
+    console.log(listaUsuarios);
     //alert(`Olá ${data.nome}, seu email é ${data.email}`);
   }
 
@@ -39,15 +55,18 @@ const FormComponent = () => {
           <input type="text" name="nome" id="nome" onChange={handleInput} required/>
         </div>
         <div>
-          <label htmlFor="email">Email</label>
-          <input type="email" name="email" id="email" onChange={handleInput}required/>
+          <label htmlFor="email">E-mail</label>
+          <input type="email" name="email" id="email" onChange={handleInput} required/>
         </div>
         <div>
-          <label htmlFor="password">Senha</label>
-          <input type="password" name="senha" id="senha" onChange={handleInput} required/>
+          <label htmlFor="senha">Senha</label>
+          <input ref={inputSenhaRef} type="password" name="senha" id="senha" onChange={handleInput} required/>
         </div>
         <div>
-          <button type='submit'>Enviar</button>
+          <button type="submit">Enviar</button>
+          <button type="button" onClick={show}>
+            {showPassword ? 'Ocultar Senha' : 'Mostrar Senha'}
+          </button>
         </div>
       </form>
     </>
