@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.bg {
+    display: flex;
+    margin: 0 auto;
+    width: 30vw;
+    height: 30vw;
+    background-color: yellow;
+    border-radius: 50%;
+    box-shadow: 2px 2px 4px red;
+}
+
+.txt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+ 
+}
