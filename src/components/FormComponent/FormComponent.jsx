@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { UsuarioContext } from "../../contexts/UsuarioContext";
 
 const FormComponent = () => {
@@ -7,12 +7,24 @@ const FormComponent = () => {
     email: '',
     senha: '',
   });
+  const [showPassword, setShowPassword] = useState(false)
 
+  const inputSenhaRef = useRef();
   const { listaUsuarios, setListaUsuarios, setUsuario } = useContext(UsuarioContext);
+
+  useEffect(() => {
+    inputSenhaRef.current.type = inputSenhaRef.current.type === 'password'
+      ? 'text'
+      : 'password';
+  }, [showPassword])
 
   const handleInput = (e) => {
     const { value, name } = e.target;
     setData({...data, [name]: value});
+  }
+
+  const show = () => {
+    setShowPassword(!showPassword);
   }
 
   const handleSubmit = (e) => {
@@ -36,10 +48,13 @@ const FormComponent = () => {
         </div>
         <div>
           <label htmlFor="senha">Senha</label>
-          <input type="password" name="senha" id="senha" onChange={handleInput} required/>
+          <input ref={inputSenhaRef} type="password" name="senha" id="senha" onChange={handleInput} required/>
         </div>
         <div>
           <button type="submit">Enviar</button>
+          <button type="button" onClick={show}>
+            {showPassword ? 'Ocultar Senha' : 'Mostrar Senha'}
+          </button>
         </div>
       </form>
     </>
