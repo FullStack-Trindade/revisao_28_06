@@ -1,5 +1,5 @@
 
-import { useState, useContext } from 'react'
+import { useState, useContext, useRef } from 'react'
 import { UsuarioContext } from '../../assets/contexts/UsuarioContext';
 
 const FormComponent = () => {
@@ -9,6 +9,8 @@ const FormComponent = () => {
         email: '',
         senha: '',
     });
+
+    const inputNomeRef = useRef();
 
     const { setUsuario, listaUsuarios, setListaUsuarios } = useContext(UsuarioContext)
 
