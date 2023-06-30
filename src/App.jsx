@@ -1,4 +1,4 @@
-import { useState } from 'react';
+/* import { useState } from 'react';
 import './App.css';
 import { UsuarioProvider } from './assets/contexts/UsuarioContext';
 import FormComponent from './components/FormComponent/FormComponent';
@@ -17,6 +17,33 @@ const showFormulario = () => {
       <HeaderComponent/> 
       { show?  <FormComponent/> : '' }
       <button onClick={showFormulario}>{!show ? 'Exibir' : 'Ocultar'}</button>
+    </UsuarioProvider>
+    </>
+  )
+}
+
+export default App */
+
+
+
+import { useState } from 'react';
+import './App.css';
+import { UsuarioProvider } from './assets/contexts/UsuarioContext';
+/* import FormComponent from './components/FormComponent/FormComponent'; */
+import TesteComponent from './components/TesteComponent/TesteComponent';
+
+function App() {
+const [show, setShow] = useState(false);
+
+const showFormulario = () => {
+  setShow(!show);
+}
+
+  return (
+    <>
+    <UsuarioProvider>
+      { show?  <TesteComponent/> : '' }
+      <button className='openTeste' onClick={showFormulario}>{!show ? 'Exibir' : 'Ocultar'}</button>
     </UsuarioProvider>
     </>
   )
